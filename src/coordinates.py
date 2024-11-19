@@ -1,13 +1,8 @@
-import astropy.units as u
-from astropy.coordinates import SkyCoord
+import numpy as np
 
-def get_sky_coords(df):
-    """
-    Convert RA, Dec, and parallax from the DataFrame into Cartesian coordinates.
-    """
-    coords = SkyCoord(
-        ra=df['ra'].values * u.degree,
-        dec=df['dec'].values * u.degree,
-        distance=(1000 / df['parallax'].values) * u.pc
-    )
-    return coords.cartesian.x.value, coords.cartesian.y.value, coords.cartesian.z.value
+def project_to_sky(ra, dec):
+    ra_rad = np.deg2rad(ra)
+    dec_rad = np.deg2rad(dec)
+    x = np.cos(dec_rad) * np.cos(ra_rad)
+    y = np.cos(dec_rad) * np.sin(ra_rad)
+    return x, y

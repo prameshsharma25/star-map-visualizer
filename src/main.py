@@ -1,7 +1,6 @@
 from star import get_star_data
-from coordinates import get_sky_coords
-from visualize import visualize_sky_map
-
+from coordinates import project_to_sky
+from visualize import plot_star_map
 
 def main():
     query = """
@@ -13,8 +12,7 @@ def main():
     """
     
     df = get_star_data(query)
-    x, y, z = get_sky_coords(df)
-    visualize_sky_map(df, x, y, z)
+    plot_star_map(df, max_star_size=50, zoom_factor=1.5)
 
 if __name__ == "__main__":
     main()
