@@ -3,12 +3,12 @@ import matplotlib.pyplot as plt
 
 from star import get_star_data
 from visualize import plot_star_map
-from flask import Flask, send_file, render_template
+from flask import Flask, send_file
 
 
 plt.switch_backend('Agg')
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='../static')
 
 def main():
     query = """
@@ -22,13 +22,7 @@ def main():
 
 @app.route('/')
 def home():
-    return """
-    <h1>3D Sky Map Generator</h1>
-    <p>Click below to generate and download the sky map:</p>
-    <a href="/download-sky-map" download="sky_map.png">
-        <button>Download Sky Map</button>
-    </a>
-    """
+    return send_file('../static/index.html')
 
 @app.route('/download-sky-map')
 def generate_image():
