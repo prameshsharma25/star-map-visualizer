@@ -1,7 +1,8 @@
 import matplotlib.pyplot as plt
 
-from matplotlib.patches import Circle
 from coordinates import project_to_sky
+from matplotlib.patches import Circle
+
 
 def plot_star_map(df, chart_size=10, max_star_size=50, zoom_factor=2):
     ra = df['ra']
@@ -37,4 +38,5 @@ def plot_star_map(df, chart_size=10, max_star_size=50, zoom_factor=2):
     ax.set_xlim(-1, 1)
     ax.set_ylim(-1, 1)
     ax.axis('off')
-    plt.show()
+
+    return fig, ax
